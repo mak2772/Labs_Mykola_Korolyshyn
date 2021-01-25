@@ -4,4 +4,4 @@ project( LAB4 )
 
 include_directories( ./include)
 
-add_executable( main ./src/main.cpp ./src/matrix.cpp )
+add_executable( main ./src/mainProg.cpp ./src/matrix.cpp )
