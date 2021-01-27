@@ -1,0 +1,3 @@
+D:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab4/build/CMakeFiles/main.dir
+D:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab4/build/CMakeFiles/ALL_BUILD.dir
+D:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab4/build/CMakeFiles/ZERO_CHECK.dir

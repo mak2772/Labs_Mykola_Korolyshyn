@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Mykola\student\jipplab\LabsJipp\Labs_Mykola_Korolyshyn\Lab4\src\mainProg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Mykola\student\jipplab\LabsJipp\Labs_Mykola_Korolyshyn\Lab4\src\matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Mykola\student\jipplab\LabsJipp\Labs_Mykola_Korolyshyn\Lab4\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7F5824B7-9D8E-3DD3-980D-AE88305C9F21}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

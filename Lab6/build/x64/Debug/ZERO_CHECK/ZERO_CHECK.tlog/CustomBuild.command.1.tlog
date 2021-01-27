@@ -1,0 +1,10 @@
+^D:\MYKOLA\STUDENT\JIPPLAB\LABSJIPP\LABS_MYKOLA_KOROLYSHYN\LAB6\BUILD\CMAKEFILES\0A4F42B43EF8E318DF99D185499007DC\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab6 -BD:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab6/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab6/build/HR.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

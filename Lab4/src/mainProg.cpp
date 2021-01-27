@@ -1,4 +1,4 @@
-#include "matrix.cpp"
+#include "matrix.hpp"
 int main(){
 	
 	char c;
