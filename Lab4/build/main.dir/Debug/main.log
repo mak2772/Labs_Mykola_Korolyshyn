@@ -1,3 +1,6 @@
 ﻿  Building Custom Rule D:/Mykola/student/jipplab/LabsJipp/Labs_Mykola_Korolyshyn/Lab4/CMakeLists.txt
   mainProg.cpp
+D:\Mykola\student\jipplab\LabsJipp\Labs_Mykola_Korolyshyn\Lab4\src\mainProg.cpp(9,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  matrix.cpp
+  Generating Code...
   main.vcxproj -> D:\Mykola\student\jipplab\LabsJipp\Labs_Mykola_Korolyshyn\Lab4\build\Debug\main.exe

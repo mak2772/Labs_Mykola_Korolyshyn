@@ -1,182 +1,171 @@
 #include "matrix.hpp"
-Matrix::Matrix(int &wwiersze,int &kkolumny)
-{
-    wiersze=wwiersze;
-    kolumny=kkolumny;
+using namespace std;
 
-    tab=new double*[wiersze+1];
-    
-    for(int i=0;i<wiersze;i++)
-        {
-            tab[i]=new double[kolumny+1];
-            for(int j=0;j<kolumny;j++)
-            {
-                tab[i][j]=0;
-            }
-        }
-}
 
-Matrix::Matrix(int &kkwadrat)
-{
-        wiersze=kkwadrat;
-        kolumny=wiersze;
-        tab=new double*[wiersze+1];
-        for(int i=0;i<wiersze;i++)
-        {
-            tab[i]=new double[wiersze+1];
-            for(int j=0;j<wiersze;j++)
-            {
-                tab[i][j]=0;
-            }
-        }
-}
+Matrix::Matrix(int N, int M){
+    if (N > 0 && M > 0){
+        m_N = N;
+        m_M = M;
 
-void Matrix::set(int &n,int &m,double &val)
-{
-    if(n-1<0 || n-1>wiersze || m-1<0 || m-1>kolumny)
-    {
-        cout<<"Wpisales bledny indeksy ktore do Matrix"<<endl;
+        matrix = new double* [M];
+        for (int i = 0; i < N; i++)
+            matrix[i] = new double[N];
+
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < M; j++)
+                matrix[i][j] = 0;
     }
-    else {
-    tab[n-1][m-1]=val;
+    else{
+        cout << "Error: Problem with size.\n";
+        exit(0);
     }
 }
 
-double Matrix::get(int &n,int &m)
-{
-     if(n-1<0 || n-1>wiersze || m-1<0 || m-1>kolumny)
-    {
-        cout<<"Wpisales indeksy ktore nie naleza do Matrix"<<endl;
-        return 0;
+Matrix::Matrix(int N){
+    if (N > 0){
+        m_N = N;
+        m_M = N;
+
+        matrix = new double* [N];
+        for (int i = 0; i < N; i++)
+            matrix[i] = new double[N];
+
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                matrix[i][j] = 0;
     }
-    else {
-    return tab[n-1][m-1];
+    else{
+        cout << "Error: Problem with size.\n";
+        exit(1);
     }
 }
 
-void Matrix::print()
-{
-    for(int i=0;i<wiersze;i++)
-        {
-            for(int j=0;j<kolumny;j++)
-            {
-                cout<<tab[i][j]<<" ";
-            }
-            cout<<endl;
-        }
-        cout<<endl;
+Matrix::Matrix(string path){
+    ifstream file;
+    file.open(path);
+    if (file.is_open()){
+        file >> m_N;
+        file >> m_M;
+
+        matrix = new double* [m_N];
+        for (int i = 0; i < m_N; i++)
+            matrix[i] = new double[m_M];
+
+        for (int i = 0; i < m_N; i++)
+            for (int j = 0; j < m_M; j++)
+                file >> matrix[i][j];
+
+        file.close();
+    }
+    else{
+        cout << "Error: Problem with opening file.\n";
+        exit(8);
+    }
 }
 
-Matrix Matrix::add(Matrix &m2)
-    {
-        int tempcol=m2.cols();
-        int temprow=m2.rows();
-        Matrix addm(temprow,tempcol);
-        if(m2.cols()!=kolumny || m2.rows()!=wiersze)
-        {
-            cout<<"Dodania Matrix roznych wymiarow"<<endl;
-            return addm;
-        }
-        for(int i=0;i<wiersze;i++)
-        {
-            for(int j=0;j<kolumny;j++)
-            {
-                addm.tab[i][j]=tab[i][j]+m2.tab[i][j];
-            }
-        }
-        return addm;
+void Matrix::set(int N, int M, double Val){
+    if ((N > 0 && M > 0) && (N <= m_N && M <= m_M)){
+        matrix[N - 1][M - 1] = Val;
     }
-
-Matrix Matrix::substract(Matrix &m2)
-    {
-        int tempcol=m2.cols();
-        int temprow=m2.rows();
-        Matrix subb(temprow,tempcol);
-        if(m2.cols()!=kolumny || m2.rows()!=wiersze)
-        {
-            cout<<"Odjecia Matrix roznych wymiarow"<<endl;
-            return subb;
-        }
-        for(int i=0;i<wiersze;i++)
-        {
-        
-            for(int j=0;j<kolumny;j++)
-            {
-                subb.tab[i][j]=tab[i][j]-m2.tab[i][j];
-            }
-        }   
-        return subb;
+    else{
+        cout << "Error: With entering value.\n";
+        exit(2);
     }
-
-Matrix Matrix::multiply(Matrix &m2)
-    {
-        int tempcol=m2.cols();
-        int temprow=m2.rows();
-        Matrix mnoz(wiersze,tempcol);
-        if(temprow!=kolumny)
-        {
-            cout<<"Nieprawidlowe mnozenie Matrix"<<endl;
-        }
-        for(int i=0;i<wiersze;i++)
-        {
-            for(int j=0;j<kolumny;j++)
-            {
-                for(int k=0;k<kolumny;k++)
-                {
-                mnoz.tab[i][j]=mnoz.tab[i][j]+tab[i][k]*m2.tab[k][j];
-                }
-                }
-        }   
-        return mnoz;
-    }
-
-int Matrix::rows()
-    {
-    return wiersze;
-    }
-
-int Matrix::cols()
-    {
-    return kolumny;
-    }
-
-void Matrix::store(string &filename, string &path)
-{
-    ofstream plik;
-    plik.open(path, ios_base::out);
-    if(plik.good()!=true)
-    {
-        cout<<"Plik nie zostal otwarty";
-    }
-    plik<<rows()<<" "<<cols()<<endl;
-    for(int i=0;i<wiersze;i++)
-    {
-        for(int j=0;j<kolumny;j++)
-        {
-            plik<<tab[i][j]<<" ";
-        }
-        plik<<endl;
-    }
-    plik.close();
 }
 
-Matrix::Matrix(string &a)
-{
-    ifstream read;
-    read.open(a);
-    int x,y;
-    read>>x;
-    read>>y;
-    wiersze=x;
-    kolumny=y;
-    tab=new double*[wiersze+1];
-    for(int i=0;i<wiersze;i++)
-        {
-        tab[i]=new double[wiersze+1];
-        for(int j=0;j<wiersze;j++)
-            {
-                read>>tab[i][j];
+double Matrix::get(int N, int M){
+    if ((N > 0 && M > 0) && (N <= m_N && M <= m_M)){
+        return matrix[N - 1][M - 1];
+    }
+    else{
+        cout << "Error: Problem with getting element of entered position.\n";
+        exit(3);
+    }
+}
+
+Matrix Matrix::add(Matrix& m2){
+    Matrix sum{m_N, m_M};
+
+    if (m_N == m2.m_N && m_M == m2.m_M){
+        for (int i = 0; i < m_N; i++)
+            for (int j = 0; j < m_M; j++)
+                sum.matrix[i][j] = matrix[i][j] + m2.matrix[i][j];
+
+        return sum;
+    }
+    else{
+        cout << "Error: Matrix are of diffrent size.\n";
+        exit(4);
+    }
+}
+
+Matrix Matrix::substract(Matrix& m2){
+    Matrix difference{m_N, m_M};
+
+    if (m_N == m2.m_N && m_M == m2.m_M){
+        for (int i = 0; i < m_N; i++)
+            for (int j = 0; j < m_M; j++)
+                difference.matrix[i][j] = matrix[i][j] - m2.matrix[i][j];
+
+        return difference;
+    }
+    else{
+        cout << "Error: subtruction matrix of different size is impossible.\n";
+        exit(5);
+    }
+}
+
+Matrix Matrix::multiply(Matrix& m2){
+    Matrix product{m_N, m_M};
+
+    if (m_M == m2.m_N){
+        for (int i = 0; i < m_N; i++)
+            for (int j = 0; j < m2.m_M; j++)
+                for (int k = 0; k < m_M; k++)
+                   product.matrix[i][j] += matrix[i][k] * m2.matrix[k][j];
+
+        return product;
+    }
+    else{
+        cout << "Error: Problem values.\n";
+        exit(6);
+    }
+}
+
+int Matrix::cols(){
+    return m_M;
+}
+
+int Matrix::rows(){
+    return m_N;
+}
+
+void Matrix::print(){
+    for (int i = 0; i < m_N; i++){
+        for (int j = 0; j < m_M; j++){
+            cout << setprecision(3) << setw(4) << matrix[i][j];
+        }
+        cout << endl;
+    }
+}
+
+void Matrix::store(string filename, string path){
+    ofstream file;
+    file.open(path + filename);
+    if (file.is_open()){
+        file << m_N << " " << m_M << endl;
+
+        for (int i = 0; i < m_N; i++){
+            for (int j = 0; j < m_M; j++){
+                file << setw(4) << matrix[i][j];
             }
+            file << endl;
         }
 
+        file.close();
+    }
+    else{
+        cout << "Error: Problem with creation of file.\n";
+        exit(7);
+    }
 }
