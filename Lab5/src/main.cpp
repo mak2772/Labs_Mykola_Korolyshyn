@@ -68,17 +68,17 @@ int main()
 
         if(m1==m2)
         {
-            cout << "Macierze m1 oraz m2 sa identyczne" << endl;
+            cout << "Matrix m1 and m2 are the same" << endl;
         }else{
-            cout << "Macierze m1 oraz m2 sa rozne" << endl;
+            cout << "Matrix m1 and m2 are different" << endl;
         }
         cout << "m1[0]: ";
         m1[0];
 
         string filename, path;
-        cout << "\nPodaj nazwe pliku do zapisu: ";
+        cout << "\nEnter new file name: ";
         cin >> filename;
-        cout << "Podaj sciezke do zapisu(np. C:\\\\folder_name\\\\): ";
+        cout << "Enter path for new file: ";
         cin >> path;
 
 
